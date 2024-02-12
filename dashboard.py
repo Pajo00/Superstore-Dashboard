@@ -15,11 +15,11 @@ st.markdown('<style>div.block-container{padding-top:1rem;}<style/>',unsafe_allow
 
 # To read excel file
 @st.cache_data
-def get_data_from_excel():
-    df = pd.read_excel("Superstore.xls")
+def get_data_from_csv():
+    df = pd.read_csv("Superstore.csv")
     return df
        
-df = get_data_from_excel()
+df = get_data_from_csv()
 
 
 
@@ -188,7 +188,6 @@ month_order = [calendar.month_name[i] for i in range(1, 13)]
 
 sub_category_Year = pd.pivot_table(data=filtered_df, values="Sales", index=["Sub-Category"], columns='month')
 sub_category_Year = sub_category_Year.reindex(columns=month_order)  # Reindex columns to ensure chronological order
-#f_sub_category_Year = sub_category_Year.applymap(lambda x: '${:,.2f}'.format(x))
 st.write(sub_category_Year.style.background_gradient(cmap="Blues"))
 
 
@@ -198,3 +197,4 @@ data1=px.scatter(filtered_df, x="Sales",y="Profit", size="Quantity", color="Cate
 data1['layout'].update(xaxis=dict(title="Sales", titlefont=dict(size=19)),
                        yaxis=dict(title="Profit", titlefont=dict(size=19)))
 st.plotly_chart(data1, use_container_width=True)
+
