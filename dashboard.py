@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="Superstore Dashboard",page_icon="bar_chart", layout="wide")
 
-# to give it a title with the bar chart emoji
+# To title of the project
 st.title("Superstore Sales Dashboard")
 st.markdown('<style>div.block-container{padding-top:1rem;}<style/>',unsafe_allow_html=True)
 
@@ -87,18 +87,23 @@ category_df=filtered_df.groupby(by=["Category"], as_index=False)["Sales"].sum()
 total_sales = int(filtered_df["Sales"].sum())
 total_profit = int(filtered_df["Profit"].sum())
 total_quantity = int(filtered_df["Quantity"].sum())
+total_orders= int(filtered_df["Order ID"].count())
 
 
-top_left_column,top_middle_column, top_right_column = st.columns(3)
+top_left_column,top_middle_column,top_middle2_column, top_right_column = st.columns(4)
 with top_left_column:
     st.subheader("Total Sales")
     st.subheader(f"${total_sales:,}")
+with top_middle2_column:
+    st.subheader("Total Orders")
+    st.subheader(f"{total_orders:,}")
 with top_middle_column:
-    st.subheader("Total Order Quantity")
+    st.subheader("Total Order Qty")
     st.subheader(f"{total_quantity:,}")
 with top_right_column:
     st.subheader("Total Profit")
     st.subheader(f"${total_profit:,}")
+
 
 st.markdown("""---""")
 
